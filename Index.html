@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Turnero de Registro</title>
+</head>
+
+<body>
+
+    <body>
+        <h1>Sistema de turnos</h1>
+
+        <form id="turnoForm">
+            <label for="dniInput">Número de DNI:</label>
+            <input type="text" id="dniInput" required>
+
+            <label for="edadInput">Edad:</label>
+            <input type="number" id="edadInput" required>
+
+            <label for="generoInput">Género (M/F):</label>
+            <input type="text" id="generoInput" maxlength="1" required>
+
+            <button type="submit">Solicitar turno</button>
+        </form>
+
+        <div id="turnoAsignado">
+            <h2>Tu número de turno asignado:</h2>
+            <p id="numeroTurno"></p>
+            <p id="mensajeTurno"></p>
+        </div>
+        <div id="turnosContainer"></div>
+    </body>
+    <script src="main.js"></script>
+
+</html>
