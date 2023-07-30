@@ -1,57 +1,150 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
-  padding: 20px;
-}
-
-h1 {
-  text-align: center;
+  background-color: #f0f0f0;
   color: #333;
 }
 
-form {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 20px;
-  margin-bottom: 20px;
+/* Estilos para el encabezado */
+header {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
 }
 
-form label {
-  display: block;
-  margin-bottom: 10px;
-  font-weight: bold;
+/* Estilos para el pie de página */
+footer {
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px;
+  text-align: center;
 }
 
-form input[type="text"],
-form input[type="number"] {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-bottom: 10px;
-}
-
-form button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
+/* Estilos para los botones */
+button, .btn {
+  background-color: #007bff;
+  color: #fff;
+  padding: 8px 16px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-#turnoAsignado {
-  background-color: #fff;
+button:hover, .btn:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos para los enlaces */
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Estilos para los formularios */
+form {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"], input[type="number"], select {
+  padding: 8px;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 20px;
+  border-radius: 4px;
+  width: 100%;
+}
+
+/* Estilos para las tablas */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+th {
+  background-color: #f0f0f0;
+}
+
+/* Estilos para la sección de turnos */
+#turnosContainer {
+  margin-top: 20px;
+}
+
+/* Estilos para los iconos */
+.icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+
+
+
+
+
+
+
+
+
+/*body {
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  color: #336699;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 5px 10px;
+  background-color: #336699;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #335577;
+}
+
+#numeroTurno {
+  font-weight: bold;
 }
 
 #turnosContainer {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 20px;
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+#registrosContainer {
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
 }

@@ -1,39 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Turnos</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Turnero de Registro</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
+    <h1>Simulador de Turnos</h1>
+    <form id="turnoForm">
+        <label for="dniInput">DNI:</label>
+        <input type="text" id="dniInput">
+        <br>
+        <label for="edadInput">Edad:</label>
+        <input type="number" id="edadInput">
+        <br>
+        <label for="generoInput">Género (M/F):</label>
+        <input type="text" id="generoInput">
+        <br>
+        <button type="submit">Solicitar Turno</button>
+    </form>
+    <p id="mensajeTurno"></p>
+    <p>Turno en espera: <span id="numeroTurno"></span></p>
+    <div id="turnosContainer"></div>
+    <div id="registrosContainer"></div>
 
-    <body>
-        <h1>Sistema de turnos</h1>
+    <canvas id="estadisticasChart"></canvas>
+    <canvas id="edadesChart"></canvas>
 
-        <form id="turnoForm">
-            <label for="dniInput">Número de DNI:</label>
-            <input type="text" id="dniInput" required>
-
-            <label for="edadInput">Edad:</label>
-            <input type="number" id="edadInput" required>
-
-            <label for="generoInput">Género (M/F):</label>
-            <input type="text" id="generoInput" maxlength="1" required>
-
-            <button type="submit">Solicitar turno</button>
-        </form>
-
-        <div id="turnoAsignado">
-            <h2>Tu número de turno asignado:</h2>
-            <p id="numeroTurno"></p>
-            <p id="mensajeTurno"></p>
-        </div>
-        <div id="turnosContainer"></div>
-    </body>
     <script src="main.js"></script>
+    <script src="registro.js"></script>
+</body>
 
 </html>

@@ -1,10 +1,3 @@
-// Objeto Persona
-function Persona(dni, edad, genero) {
-  this.dni = dni;
-  this.edad = edad;
-  this.genero = genero;
-}
-
 // Variables
 let turnos = [];
 
@@ -22,8 +15,6 @@ function guardarTurnosEnAlmacenamiento() {
   const turnosJSON = JSON.stringify(turnos);
   localStorage.setItem('turnos', turnosJSON);
 }
-// Vaciar el localStorage
-//localStorage.clear();
 
 // Generar un turno condicional basado en la persona
 function generarTurnoCondicional(persona) {
@@ -66,7 +57,7 @@ function solicitarTurno(event) {
   const genero = document.getElementById('generoInput').value.trim().toUpperCase();
 
   if (dni !== '') {
-    const persona = new Persona(dni, edad, genero);
+    const persona = { dni, edad, genero };
 
     if (persona.edad < 18) {
       document.getElementById('numeroTurno').textContent = '';
@@ -80,6 +71,7 @@ function solicitarTurno(event) {
 
       guardarTurnosEnAlmacenamiento();
       mostrarTurnos();
+      registrarTurno(turno, persona);
     }
   }
 }
@@ -95,12 +87,86 @@ function mostrarTurnos() {
     turnoElement.textContent = turno;
     turnosContainer.appendChild(turnoElement);
   }
+  mostrarEstadisticas(turnos);
 }
 
 // Event Listener para el formulario de solicitud de turno
 document.getElementById('turnoForm').addEventListener('submit', solicitarTurno);
 
 // Llamada a función para obtener los turnos almacenados al cargar la página
-obtenerTurnosAlmacenados();
-// Llamada a función para evitar el error  "Uncaught TypeError: Cannot set properties of null (setting 'innerHTML')"
 document.addEventListener('DOMContentLoaded', obtenerTurnosAlmacenados);
+
+// Estadisticas 
+function mostrarEstadisticas(turnos) {
+  const generos = {
+    'M': 0,
+    'F': 0,
+    'Otro': 0,
+  };
+
+  const edades = {
+    'Menor': 0,
+    '1': 0,
+    '2': 0,
+  };
+
+  turnos.forEach(turno => {
+    const genero = turno.charAt(0);
+    generos[genero]++;
+
+    const edadIndex = turno.indexOf('-') + 1;
+    const edad = turno.substring(edadIndex);
+    edades[edad]++;
+  });
+
+  const generosData = Object.values(generos);
+  const edadesData = Object.values(edades);
+
+  const ctx = document.getElementById('estadisticasChart').getContext('2d');
+  const estadisticasChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: Object.keys(generos),
+      datasets: [
+        {
+          label: 'Género',
+          data: generosData,
+          backgroundColor: ['rgba(54, 162, 235, 0.5)', 'rgba(255, 99, 132, 0.5)', 'rgba(255, 206, 86, 0.5)'],
+          borderColor: ['rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 206, 86, 1)'],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+
+  const ctx2 = document.getElementById('edadesChart').getContext('2d');
+  const edadesChart = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+      labels: Object.keys(edades),
+      datasets: [
+        {
+          label: 'Edades',
+          data: edadesData,
+          backgroundColor: ['rgba(75, 192, 192, 0.5)', 'rgba(153, 102, 255, 0.5)', 'rgba(255, 159, 64, 0.5)'],
+          borderColor: ['rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+}
