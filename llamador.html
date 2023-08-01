@@ -1,8 +1,9 @@
+<!-- llamador.html -->
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Turnero</title>
+    <title>Llamador</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
@@ -14,7 +15,7 @@
             <li><a href="llamador.html">Llamador</a></li>
         </ul>
     </nav>
-    <h1>Sistema de Turnos</h1>
+    <h1>Llamador</h1>
 
     <!-- Spinner para simular la carga -->
     <div id="spinner" class="overlay" style="display: none;">
@@ -34,37 +35,30 @@
         </div>
     </div>
 
-    <form id="turnoForm">
-        <label for="dniInput">DNI:</label>
-        <input type="text" id="dniInput" required>
-        <label for="edadInput">Edad:</label>
-        <input type="number" id="edadInput" required>
-        <label for="generoInput">Género:</label>
-        <input type="text" id="generoInput" required>
-        <button type="submit">Solicitar Turno</button>
-    </form>
-    <div id="mensajeTurno"></div>
-    <div id="numeroTurno"></div>
-    <button id="borrarTurnosBtn">Borrar turnos</button>
+    <div id="registrosContainer"></div>
+    
+    <div id="turnosEnEspera">
+        <!-- Aquí se mostrarán los turnos en espera -->
     </div>
-    <div id="turnosContainer"></div>
-    <div>
-        <h2>Estadísticas</h2>
-        <div id="estadisticasChart"></div>
-        <div id="edadesChart"></div>
-    </div>
-
+    <button id="siguienteTurnoBtn">Siguiente Turno</button>
+    <!-- Vincula los archivos JS que necesites, como el main.js y otras librerías -->
     <script src="main.js"></script>
     <script src="registro.js"></script>
     <script>
-        // Función para mostrar el spinner cuando se hace clic en el enlace "Llamador"
-        function mostrarSpinner() {
+        document.addEventListener('DOMContentLoaded', function() {
+          document.getElementById('siguienteTurnoBtn').addEventListener('click', llamarSiguienteTurno);
+          mostrarTurnosEnEspera();
+        });
+      </script>
+    <script>
+        // Función para ocultar el spinner cuando la página está completamente cargada
+        function ocultarSpinner() {
             const spinner = document.getElementById('spinner');
-            spinner.style.display = 'block';
+            spinner.style.display = 'none';
         }
 
-        // Llamamos a la función cuando se hace clic en el enlace "Llamador"
-        document.getElementById('llamadorLink').addEventListener('click', mostrarSpinner);
+        // Llamamos a la función cuando la página está completamente cargada
+        document.addEventListener('DOMContentLoaded', ocultarSpinner);
     </script>
 </body>
 

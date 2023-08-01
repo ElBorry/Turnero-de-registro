@@ -32,4 +32,10 @@ function mostrarRegistros() {
 // Función para registrar un turno
 function registrarTurno(turno, persona) {
     const registro = `DNI: ${persona.dni}, Edad: ${persona.edad}, Género: ${persona.genero}, Turno: ${turno}`;
+    registros.push(registro);
+    guardarRegistrosEnAlmacenamiento();
+    mostrarRegistros();
 }
+
+// Llamada a función para obtener los registros almacenados al cargar la página
+document.addEventListener('DOMContentLoaded', obtenerRegistrosAlmacenados);

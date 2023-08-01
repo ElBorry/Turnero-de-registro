@@ -20,14 +20,27 @@ function guardarTurnosEnAlmacenamiento() {
 function generarTurnoCondicional(persona) {
   let turno = '';
 
-  if (persona.genero.toUpperCase() === 'M' && persona.edad <= 50) {
-    turno = 'M';
-  } else if (persona.genero.toUpperCase() === 'F' && persona.edad <= 50) {
-    turno = 'F';
-  } else if (persona.edad > 50) {
-    turno = 'P';
-  } else {
-    turno = 'Otro';
+  const genero = persona.genero.toUpperCase();
+  const edad = persona.edad;
+
+  switch (genero) {
+    case 'M':
+      if (edad <= 50) {
+        turno = 'M';
+      } else {
+        turno = 'P';
+      }
+      break;
+    case 'F':
+      if (edad <= 50) {
+        turno = 'F';
+      } else {
+        turno = 'P';
+      }
+      break;
+    default:
+      turno = 'Otro';
+      break;
   }
 
   if (persona.edad < 18) {
@@ -90,11 +103,19 @@ function mostrarTurnos() {
   mostrarEstadisticas(turnos);
 }
 
+// Borrar los turnos almacenados
+function borrarTurnos() {
+  turnos = [];
+  guardarTurnosEnAlmacenamiento();
+  mostrarTurnos();
+}
+
+// Event Listener para el botón de borrar turnos
+document.getElementById('borrarTurnosBtn').addEventListener('click', borrarTurnos);
+
 // Event Listener para el formulario de solicitud de turno
 document.getElementById('turnoForm').addEventListener('submit', solicitarTurno);
 
-// Llamada a función para obtener los turnos almacenados al cargar la página
-document.addEventListener('DOMContentLoaded', obtenerTurnosAlmacenados);
 
 // Estadisticas 
 function mostrarEstadisticas(turnos) {
@@ -118,55 +139,108 @@ function mostrarEstadisticas(turnos) {
     const edad = turno.substring(edadIndex);
     edades[edad]++;
   });
+// Funciones para mostrar los gráficos con D3.js
+function mostrarGraficoGeneros(generos) {
+  const canvasGeneros = d3.select('#estadisticasChart');
 
-  const generosData = Object.values(generos);
-  const edadesData = Object.values(edades);
+    // Filtrar los turnos vacíos
+    const generosData = Object.values(generos).filter(count => count > 0);
+    const generosLabels = Object.keys(generos).filter(genero => generos[genero] > 0);
 
-  const ctx = document.getElementById('estadisticasChart').getContext('2d');
-  const estadisticasChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: Object.keys(generos),
-      datasets: [
-        {
-          label: 'Género',
-          data: generosData,
-          backgroundColor: ['rgba(54, 162, 235, 0.5)', 'rgba(255, 99, 132, 0.5)', 'rgba(255, 206, 86, 0.5)'],
-          borderColor: ['rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 206, 86, 1)'],
-          borderWidth: 1,
-        },
-      ],
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
-  });
+  const colorScale = d3.scaleOrdinal()
+    .domain(generosLabels)
+    .range(['rgba(54, 162, 235, 0.5)', 'rgba(255, 99, 132, 0.5)', 'rgba(255, 206, 86, 0.5)']);
 
-  const ctx2 = document.getElementById('edadesChart').getContext('2d');
-  const edadesChart = new Chart(ctx2, {
-    type: 'bar',
-    data: {
-      labels: Object.keys(edades),
-      datasets: [
-        {
-          label: 'Edades',
-          data: edadesData,
-          backgroundColor: ['rgba(75, 192, 192, 0.5)', 'rgba(153, 102, 255, 0.5)', 'rgba(255, 159, 64, 0.5)'],
-          borderColor: ['rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
-          borderWidth: 1,
-        },
-      ],
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-        },
-      },
-    },
-  });
+  const width = 400;
+  const height = 300;
+
+  const svg = canvasGeneros.append('svg')
+    .attr('width', width)
+    .attr('height', height);
+
+  const pie = d3.pie().value(d => d);
+
+  const arc = d3.arc()
+    .innerRadius(0)
+    .outerRadius(Math.min(width, height) / 2 - 20);
+
+  const arcs = svg.selectAll('arc')
+    .data(pie(generosData))
+    .enter()
+    .append('g')
+    .attr('class', 'arc')
+    .attr('transform', `translate(${width / 2}, ${height / 2})`);
+
+  arcs.append('path')
+    .attr('d', arc)
+    .attr('fill', (d, i) => colorScale(i))
+    .attr('stroke', '#fff')
+    .attr('stroke-width', '2px');
+
+  arcs.append('text')
+    .attr('transform', d => `translate(${arc.centroid(d)})`)
+    .attr('text-anchor', 'middle')
+    .text(d => d.data)
+    .style('font-size', '14px')
+    .style('fill', '#000');
 }
+
+function mostrarGraficoEdades(edades) {
+  // Código similar al gráfico de géneros, ajusta los detalles según tus necesidades
+}
+
+  mostrarGraficoGeneros(generos);
+  mostrarGraficoEdades(edades);
+}
+
+// Llamada a función para obtener los turnos almacenados al cargar la página
+document.addEventListener('DOMContentLoaded', obtenerTurnosAlmacenados);
+
+// Llamada inicial para mostrar las estadísticas al cargar la página
+mostrarEstadisticas(turnos);
+
+
+// Mostrar los turnos en espera en la página "llamador.html"
+function mostrarTurnosEnEspera() {
+  const turnosEnEsperaContainer = document.getElementById('turnosEnEspera');
+  turnosEnEsperaContainer.innerHTML = '';
+
+  for (let i = 0; i < turnos.length; i++) {
+    const turno = turnos[i];
+    const turnoElement = document.createElement('p');
+    turnoElement.textContent = turno;
+    turnosEnEsperaContainer.appendChild(turnoElement);
+  }
+}
+
+// Llamar al siguiente turno
+function llamarSiguienteTurno() {
+  if (turnos.length > 0) {
+    // Prioridad: buscar turno con 'P'
+    const turnoPrioridad = turnos.find(turno => turno.includes('-P'));
+    if (turnoPrioridad) {
+      // Llamar al turno con prioridad
+      alert('Llamando al siguiente turno con prioridad: ' + turnoPrioridad);
+      // Eliminar el turno de la lista de turnos
+      turnos = turnos.filter(turno => turno !== turnoPrioridad);
+    } else {
+      // Si no hay turnos con prioridad, llamar al turno más antiguo
+      const siguienteTurno = turnos[0];
+      alert('Llamando al siguiente turno: ' + siguienteTurno);
+      // Eliminar el turno de la lista de turnos
+      turnos.shift();
+    }
+
+    // Actualizar la lista de turnos en espera
+    guardarTurnosEnAlmacenamiento();
+    mostrarTurnosEnEspera();
+  } else {
+    alert('No hay más turnos en espera.');
+  }
+}
+
+// Asignar el evento de click al botón "Siguiente Turno"
+document.getElementById('siguienteTurnoBtn').addEventListener('click', llamarSiguienteTurno);
+
+// Mostrar los turnos en espera al cargar la página
+mostrarTurnosEnEspera();
