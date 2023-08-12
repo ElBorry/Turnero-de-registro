@@ -1,11 +1,12 @@
-<!-- llamador.html -->
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
-    <title>Llamador</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Llamador de Turnos</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
 </head>
 
 <body>
@@ -15,51 +16,59 @@
             <li><a href="llamador.html">Llamador</a></li>
         </ul>
     </nav>
-    <h1>Llamador</h1>
+    <header>
+        <img src="./asset/BANCOMUNDIAL.png" alt="Logo del Banco Mundial" width="150" height="90">
+        <h1>Llamador de Turnos</h1>
+        <p class="lead">
+            En esta página podrás llamar a nuestros clientes. Nuestra prioridad son las personas mayores de 60 años, a
+            quienes identificamos con turnos P.
+        </p>
+    </header>
 
-    <!-- Spinner para simular la carga -->
-    <div id="spinner" class="overlay" style="display: none;">
-        <div class="spinner center">
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-        </div>
-    </div>
+    <main class="container">
+        <section>
+            <h2>Turnos en Espera</h2>
+            <div id="turnosEnEspera"></div>
+            <div id="turnosContainer"></div>
+        </section>
 
-    <div id="registrosContainer"></div>
-    
-    <div id="turnosEnEspera">
-        <!-- Aquí se mostrarán los turnos en espera -->
-    </div>
-    <button id="siguienteTurnoBtn">Siguiente Turno</button>
-    <!-- Vincula los archivos JS que necesites, como el main.js y otras librerías -->
-    <script src="main.js"></script>
-    <script src="registro.js"></script>
+        <section>
+            <h2>Turno Llamado</h2>
+            <div id="turnoLlamado"></div>
+        </section>
+
+        <section style="margin-top: 20px;">
+            <button class="w-100 btn btn-lg btn-primary" id="siguienteTurnoBtn">Siguiente Turno</button>
+            <button class="w-100 btn btn-lg btn-primary" id="borrarTurnosBtn">Borrar Turnos</button>
+        </section>
+
+        <section>
+            <h2>Estadísticas</h2>
+            <div id="estadisticasChart"></div>
+            <div id="edadesChart"></div>
+        </section>
+
+        <section>
+            <button class="w-100 btn btn-lg btn-primary" id="mostrarGraficoBtn" onclick="crearGrafico()">Crear Gráfico de Torta</button>
+            <div id="graficoContainer"></div>
+        </section>
+    </main>
+
+    <footer>
+        © 2023 Banco Mundial. Todos los derechos reservados.
+    </footer>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          document.getElementById('siguienteTurnoBtn').addEventListener('click', llamarSiguienteTurno);
-          mostrarTurnosEnEspera();
-        });
-      </script>
-    <script>
-        // Función para ocultar el spinner cuando la página está completamente cargada
-        function ocultarSpinner() {
-            const spinner = document.getElementById('spinner');
-            spinner.style.display = 'none';
-        }
-
-        // Llamamos a la función cuando la página está completamente cargada
-        document.addEventListener('DOMContentLoaded', ocultarSpinner);
+        document.getElementById('siguienteTurnoBtn').addEventListener('click', llamarSiguienteTurno);
+        document.getElementById('borrarTurnosBtn').addEventListener('click', borrarTurnos);
     </script>
+    <script>
+        document.getElementById('mostrarGraficoBtn').addEventListener('click', function () {
+            crearGrafico();
+        });
+    </script>
+    
+    <script src="main.js"></script>
 </body>
 
 </html>

@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
-    <title>Turnero</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Turno </title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="main.js"></script>
+    <script src="registro.js"></script>
 </head>
 
 <body>
@@ -14,58 +18,49 @@
             <li><a href="llamador.html">Llamador</a></li>
         </ul>
     </nav>
-    <h1>Sistema de Turnos</h1>
-
-    <!-- Spinner para simular la carga -->
-    <div id="spinner" class="overlay" style="display: none;">
-        <div class="spinner center">
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
+    <header>
+        <div class="py-5 text-center">
+            <img class="d-block mx-auto mb-2" src="./asset/BANCOMUNDIAL.png" alt="" width="150" height="90">
+            <h1>Sistema de Registro de Turnos</h1>
+            <p class="lead">
+                A continuación registra los datos solicitados en la sucursal, para poder obtener tu turno con uno de
+                nuestros representantes.
+            </p>
         </div>
-    </div>
-
-    <form id="turnoForm">
-        <label for="dniInput">DNI:</label>
-        <input type="text" id="dniInput" required>
-        <label for="edadInput">Edad:</label>
-        <input type="number" id="edadInput" required>
-        <label for="generoInput">Género:</label>
-        <input type="text" id="generoInput" required>
-        <button type="submit">Solicitar Turno</button>
-    </form>
-    <div id="mensajeTurno"></div>
-    <div id="numeroTurno"></div>
-    <button id="borrarTurnosBtn">Borrar turnos</button>
-    </div>
-    <div id="turnosContainer"></div>
-    <div>
-        <h2>Estadísticas</h2>
-        <div id="estadisticasChart"></div>
-        <div id="edadesChart"></div>
-    </div>
-
-    <script src="main.js"></script>
-    <script src="registro.js"></script>
+    </header>
+    <center>
+        <main class="form-signin">
+            <form id="turnoForm">
+                <h2 class="h2 mb-6 fw-normal"> Solicitar Turno </h2>
+                <div class="form-floating">
+                    <input type="number" class="form-control" id="dniInput" placeholder="DNI">
+                    <label for="dniInput" class="form-label"></label>
+                </div>
+                <div class="form-floating">
+                    <input type="number" class="form-control" id="edadInput" required placeholder="Edad">
+                    <label for="edadInput" class="form-label"></label>
+                </div>
+                <div class="form-floating">
+                    <input type="text" id="generoInput" required required placeholder="Genero">
+                    <label for="generoInput" class="form-label"></label>
+                </div>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Solicitar Turno</button>
+                <br>
+                <section id="turnoInfo" style="margin-top: 20px;">
+                    <div class="mt-5 mb-3 text-muted" id="mensajeTurno"></div>
+                    <div class="mt-5 mb-3 text-muted" id="numeroTurno"></div>
+                </section>
+            </form>
+    </center>
+    </main>
+    <footer>
+        © 2023 Banco Mundial. Todos los derechos reservados.
+    </footer>
     <script>
-        // Función para mostrar el spinner cuando se hace clic en el enlace "Llamador"
-        function mostrarSpinner() {
-            const spinner = document.getElementById('spinner');
-            spinner.style.display = 'block';
-        }
-
-        // Llamamos a la función cuando se hace clic en el enlace "Llamador"
-        document.getElementById('llamadorLink').addEventListener('click', mostrarSpinner);
+        // Event Listener para el formulario de solicitud de turno
+        document.getElementById('turnoForm').addEventListener('submit', solicitarTurno);
     </script>
+    </center>
 </body>
 
 </html>

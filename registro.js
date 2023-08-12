@@ -19,13 +19,13 @@ function guardarRegistrosEnAlmacenamiento() {
 // Mostrar los registros en la página
 function mostrarRegistros() {
     const registrosContainer = document.getElementById('registrosContainer');
-    registrosContainer.innerHTML = ''; // Limpiar el contenido anterior
+
 
     for (let i = 0; i < registros.length; i++) {
         const registro = registros[i];
         const registroElement = document.createElement('p');
         registroElement.textContent = registro;
-        registrosContainer.appendChild(registroElement);
+    
     }
 }
 
@@ -39,3 +39,4 @@ function registrarTurno(turno, persona) {
 
 // Llamada a función para obtener los registros almacenados al cargar la página
 document.addEventListener('DOMContentLoaded', obtenerRegistrosAlmacenados);
+

@@ -1,20 +1,28 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-  color: #333;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5px;
 }
 
-/* Estilos para el encabezado */
 header {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px;
+  background-color: #001f3f;
+  color: white;
   text-align: center;
+  padding: 20px 0;
 }
 
+main {
+  min-height: 80vh
+}
 /* Estilos para el pie de página */
 footer {
-  background-color: #007bff;
+  background-color: #001f3f;;
   color: #fff;
   padding: 5px;
   text-align: center;
@@ -47,7 +55,7 @@ a:hover {
 
 /* Estilos para los formularios */
 form {
-  margin-bottom: 20px;
+  margin-bottom: 20%;
 }
 
 label {
@@ -59,7 +67,7 @@ input[type="text"], input[type="number"], select {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 100%;
+  width: 30%;
 }
 
 /* Estilos para las tablas */
@@ -83,11 +91,136 @@ th {
 }
 
 /* Estilos para los iconos */
-.icon {
-  width: 16px;
-  height: 16px;
-  margin-right: 5px;
-  vertical-align: middle;
+img {
+  width: 16%;
+  height: 50%;
+  margin-right: 75px;
+  vertical-align:baseline; 
 }
 
+/* Agregar estilos para el turno llamado */
+.turno-llamado {
+  display: none;
+  padding: 10px;
+  background-color: blue;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
 
+#turnoLlamado {
+  border: 2px solid black;
+  padding: 10px;
+  width: 45%;
+  height: 56%;
+  text-align: center;
+  font-weight: bold;
+}
+
+nav {
+  background-color: #001f3f; /* Color de fondo */
+  color: white; /* Color del texto */
+  font-family: Arial, sans-serif; /* Fuente del texto */
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+nav li {
+  margin: 0 20px; /* Espaciado entre elementos del navbar */
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #ff851b; /* Color al pasar el mouse */
+}
+
+/* Estilos para los botones */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.btn-primary {
+  background-color: #001f3f;
+  color: white;
+}
+
+/* Estilos para los títulos */
+h1 {
+  margin-top: 30px;
+  font-size: 28px;
+}
+
+/* Estilos para los párrafos */
+p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* Estilos para los elementos en espera */
+#turnosEnEspera {
+  background-color: #f0f0f0;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+/* Estilos para el turno llamado */
+#turnoLlamado {
+  background-color: #ff851b;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+/* Estilos para el contenedor de gráficos */
+#graficoContainer {
+  background-color: #f0f0f0;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+#mensajeTurno,
+#numeroTurno {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  margin: 0 auto; /* Centrar horizontalmente */
+  max-width: 80%; /* Establecer el ancho máximo */
+  border-radius: 5px;
+}
+
+#numeroTurno {
+  font-size: 24px;
+}
+
+/* Agregar estilos para el turno resaltado */
+.turno-resaltado {
+  font-size: 32px;
+  background-color: #ff851b; /* Color de fondo para el turno resaltado */
+  color: white; /* Color de fuente para el turno resaltado */
+  padding: 5px 10px;
+  border-radius: 5px;
+}
